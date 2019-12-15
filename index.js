@@ -20,9 +20,7 @@ bot.signIn(phone)
 app.use(morgan('dev'));
 
 
-bot.setWebhook(url)
-  .then(() => yourBot.doSomething())
-  .catch(err => console.log(err));
+
 
 app.post(url,  function (req, res) {
     bot.sendMessage(req.body.messages[0].author, 'ECHO TEXT');
