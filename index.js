@@ -1,35 +1,27 @@
+// First of all - set a webhook to URL like http://your_website.com/my_webhook_url
 
-var express = require('express');
-const morgan = require('morgan');
-const path = require('path');
-const Chapi = require('whatsapp-chapi');
-const inst = "https://eu34.chat-api.com/instance86436";
-const token = "hjzo5kodgia081x5";
-const phone = "5217561019626";
-//const url = "https://chatbot.herokuapp.com/";
-const webhookUrl = "https://chatbotchapi.herokuapp.com/";
+// Require Express JS и Body Parser for JSON POST acceptance
+var app = require('express')();
+var bodyParser = require('body-parser');
+let enviar = require('./modelo');
 
+app.use(bodyParser.json());
+const webhookurl = "http://chatbotchapi.herokuapp.com/";
 
-const app = express();
-//app.use(url, bot.middleware());
-const bot = new Chapi(inst, token, webhookUrl);
+// Handle POST request
+app.post(webhookurl, function (req, res) {
+    var data = req.body; // New messages in the "body" variable
+    for (var i = 0; i < data.messages.length; i++) { // For each message
+        var message = data.messages[i];
+        console.log(message.author + ': ' + message.body); //Send it to console
+        
+    }
+    const data = {
+        "phone": "5217561019626",
+        "body": "texto cachado en el servidor"
+    }
+    const result = await enviar.post('https://eu34.chat-api.com/instance86436/sendMessage?token=hjzo5kodgia081x5', data);
+    res.send('Ok'); //Response does not matter
+});
 
-bot.signIn(phone)
-.then(() => yourBot.doSomething())
-.catch(err => console.log(err));
-
-app.use(morgan('dev'));
-
-
-app.post(webhookUrl,  function (req, res) {
-    bot.sendMessage(req.body.messages[0].author, 'ECHO TEXT');
-    console.log(req.body);
-    res.sendStatus(200);
-  });
- 
-// Wasn't that easy? Let's create HTTPS server and set the webhook:
-const http = require('http');
-const port = process.env.PORT || 4000;
- 
-// Chapi will push messages sent to this URL. Web server should be internet-facing.
-http.createServer(app).listen(port, () => bot.setWebhook(webhookUrl));
+app.listen(80);

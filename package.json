@@ -1,20 +1,17 @@
 {
-  "name": "chapi",
+  "name": "botnodeapi",
   "version": "1.0.0",
-  "description": "chat boot con chapi",
+  "description": "chat api ultima",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Gerardo Rosas Rodriguez",
+  "author": "Gerardo Rosas",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1",
-    "morgan": "^1.9.1",
-    "nodemon": "^2.0.2",
-    "path": "^0.12.7",
-    "whatsapp-chapi": "^1.1.1"
+    "async-request": "^1.2.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
   }
 }
