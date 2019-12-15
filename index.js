@@ -6,7 +6,7 @@ const inst = "https://eu34.chat-api.com/instance86436";
 const token = "hjzo5kodgia081x5";
 const phone = "5217561019626";
 //const url = "https://chatbot.herokuapp.com/";
-const url = "http://localhost:4000/";
+const url = "https://chatbotchapi.herokuapp.com/";
 
 
 const app = express();
