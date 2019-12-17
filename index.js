@@ -34,11 +34,11 @@ request(options,async function (error, response, body) {
   if (error) throw new Error(error);
 
   console.log(body);
-  const data = {
+  const datamensaje = {
       "phone": "5217561019626",
       "body": "hola es una prueba del servidor"
   }
-  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', data);
+  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', datamensaje);
   console.log(result);
   console.log("actividad en whapsat");
   
@@ -48,11 +48,11 @@ app.post('https://chatbotchapi.herokuapp.com/', function (req, res) {
     var data = req.body; // New messages in the "body" variable
     console.log(data); //Response does not matter
 
-    const data = {
+    const datamensaje = {
       "phone": "5217561019626",
       "body": "hola es una prueba del servidor"
   }
-  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', data);
+  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', datamensaje);
 
     res.json(data);
 });
