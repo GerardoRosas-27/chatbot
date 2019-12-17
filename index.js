@@ -15,7 +15,7 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.post("/chat",async function(req, res) {
-    var result = req.body.messages[1];
+    var result = req.body.messages[0];
    
     var mensaje = result.body;
 
