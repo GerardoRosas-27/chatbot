@@ -44,7 +44,8 @@ request(options,async function (error, response, body) {
   
 });
 
-app.post('https://chatbotchapi.herokuapp.com/', function (req, res) {
+
+app.post('https://chatbotchapi.herokuapp.com/',async function (req, res) {
     var data = req.body; // New messages in the "body" variable
     console.log(data); //Response does not matter
 
@@ -54,7 +55,7 @@ app.post('https://chatbotchapi.herokuapp.com/', function (req, res) {
   }
   const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', datamensaje);
 
-    res.json(data);
+   res.json(data);
 });
 
 
