@@ -14,8 +14,8 @@ restService.use(bodyParser.json());
 
 restService.post("/chat",async function(req, res) {
   const datamensaje = {
-    "phone": "5217561019626",
-    "body": "hola es una prueba del servidor"
+    "phone": "5215534122853",
+    "body": "resultados" + req.body
 }
 const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', datamensaje);
   return res.json(req.body);

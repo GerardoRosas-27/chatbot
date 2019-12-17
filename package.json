@@ -1,15 +1,20 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "chatbot_funcional",
   "version": "1.0.0",
-  "description": "Webhook echo sample",
+  "description": "Es un chat Funcional que escucha los mensajes entrantes y envia una respuesta al usuario. ",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sunil Syal",
+  "author": "Gerardo Gabriel Rosas Rodriguez",
+  "license": "MIT",
   "dependencies": {
     "async-request": "^1.2.0",
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2"
   }
 }
