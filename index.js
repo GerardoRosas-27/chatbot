@@ -1,27 +1,67 @@
-// First of all - set a webhook to URL like http://your_website.com/my_webhook_url
+const express = require('express');
+var request = require("request");
+const morgan = require('morgan');
 
-// Require Express JS и Body Parser for JSON POST acceptance
-var app = require('express')();
-var bodyParser = require('body-parser');
-let enviar = require('./modelo');
+const app = express();
+//-- middlewares de la cabecera
 
-app.use(bodyParser.json());
-const webhookurl = "http://chatbotchapi.herokuapp.com/";
+app.use((req, res, next) => {
+    // Dominio que tengan acceso (ej. 'http://example.com')
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Metodos de solicitud que deseas permitir
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    // Encabecedados que permites (ej. 'X-Requested-With,content-type')
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+  });
 
-// Handle POST request
-app.post(webhookurl, function (req, res) {
-    var data = req.body; // New messages in the "body" variable
-    for (var i = 0; i < data.messages.length; i++) { // For each message
-        var message = data.messages[i];
-        console.log(message.author + ': ' + message.body); //Send it to console
-        
-    }
-    const data = {
-        "phone": "5217561019626",
-        "body": "texto cachado en el servidor"
-    }
-    const result = await enviar.post('https://eu34.chat-api.com/instance86436/sendMessage?token=hjzo5kodgia081x5', data);
-    res.send('Ok'); //Response does not matter
+  app.use(morgan('dev'));
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+var options = { method: 'POST',
+  url: 'https://api.mercury.chat/sdk/v1/whatsapp/webhook',
+  qs: { api_token: '5df8f63a0c63380019241e21RJa4Zqs3J' },
+  headers: { 'Content-Type': 'application/json' },
+  body: 
+   { is_webhook_enable: true,
+     webhook_url: 'https://chatbotchapi.herokuapp.com/' },
+  json: true };
+
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+  console.log("actividad en whapsat");
+  
 });
 
-app.listen(80);
+app.post('https://chatbotchapi.herokuapp.com/', function (req, res) {
+    var data = req.body; // New messages in the "body" variable
+    console.log(data); //Response does not matter
+    res.json(data);
+});
+
+
+
+
+/*
+var getwebhok = { method: 'GET',
+  url: 'https://api.mercury.chat/sdk/v1/whatsapp/webhook',
+  qs: { api_token: '5df8f63a0c63380019241e21RJa4Zqs3J' } };
+
+request(getwebhok, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+*/
+
+
+app.set('port', process.env.PORT || 4000);
+
+
+app.listen(app.get('port'), () => {
+    console.log(`server on port ${app.get('port')}`);
+});

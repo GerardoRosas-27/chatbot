@@ -1,17 +1,19 @@
 {
-  "name": "botnodeapi",
+  "name": "api_chat_node_mercurio",
   "version": "1.0.0",
-  "description": "chat api ultima",
+  "description": "api chat de mercurio",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Gerardo Rosas",
+  "author": "Gerardo Gabriel Rosas Rodriguez",
   "license": "MIT",
   "dependencies": {
-    "async-request": "^1.2.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.0"
   }
 }
