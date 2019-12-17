@@ -1,6 +1,7 @@
 const express = require('express');
 var request = require("request");
 const morgan = require('morgan');
+const enviar = require('./modeloChat');
 
 const app = express();
 //-- middlewares de la cabecera
@@ -29,10 +30,16 @@ var options = { method: 'POST',
   json: true };
 
 
-request(options, function (error, response, body) {
+request(options,async function (error, response, body) {
   if (error) throw new Error(error);
 
   console.log(body);
+  const data = {
+      "phone": "5217561019626",
+      "body": "hola es una prueba del servidor"
+  }
+  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', data);
+  console.log(result);
   console.log("actividad en whapsat");
   
 });
@@ -40,6 +47,13 @@ request(options, function (error, response, body) {
 app.post('https://chatbotchapi.herokuapp.com/', function (req, res) {
     var data = req.body; // New messages in the "body" variable
     console.log(data); //Response does not matter
+
+    const data = {
+      "phone": "5217561019626",
+      "body": "hola es una prueba del servidor"
+  }
+  const result = await enviar.post('https://eu97.chat-api.com/instance86894/sendMessage?token=90jjwn8m91ttl8un', data);
+
     res.json(data);
 });
 
